@@ -27,20 +27,40 @@ def lower_case_contents(file_contents):
         low_case_text = file_contents.lower()
         return low_case_text
 
-# kod pomiedzy komentarzami do skonczenia
 
 def make_dict_list(dict):
       book_dict_list = []
-      for record in dict:
-            
-# kod pomiedzy komentarzami do skonczenia            
-      
+      dict_items = dict.items()
+      for record in dict_items:
+            a = record[0]
+            b = record[1]
+            value = {"letter": f"{a}", "num": b}
+            book_dict_list.append(value)
+      return book_dict_list
 
-z = contents()
+def sort_on(dict):
+      return dict["num"]
 
-y = lower_case_contents(z)
+def printer_wiadomosci(words_counter, input_list):
+      print(f"--- Begin report of books/frankenstein.txt ---\n{words_counter} words found in the document")
+      for input in input_list:
+            ch = input["letter"]
+            nb = input["num"]
+            print(f"The '{ch}' character was found {nb} times")
+      print("--- End report ---")
+
+
+contents_of_the_file = contents()
+
+number_of_words = word_count(contents_of_the_file)
+
+y = lower_case_contents(contents_of_the_file)
 
 char_dict = main(y)
 
-# print(y)
-print(char_dict)
+listofdict = make_dict_list(char_dict)
+
+listofdict.sort(reverse=True, key=sort_on)
+
+printer_wiadomosci(number_of_words, listofdict)
+
